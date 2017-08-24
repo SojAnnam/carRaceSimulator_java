@@ -10,8 +10,8 @@ public class Car {
     int distancetravel;
     int speed;
 
-    public Car (String name){
-        this.name = name;
+    public Car (){
+        name = carName();
         normalspeed = normalSpeed();
     }
 
@@ -37,7 +37,26 @@ public class Car {
     public void moveForAnHour(){
         distancetravel = distancetravel + normalspeed;
     }
+    private String carName(){
+        List<String> carNamesList = Arrays.asList(  "Centaur", "Majesty","Utopia",
+                "Scorpion","Scorpion", "Nimbus",
+                "Zeal", "Mammoth","Olympian",
+                "Serpent", "Paradox", "Phantom",
+                "Cosmos", "Universe", "Harmony",
+                "Moonlight", "Baron", "Dusk",
+                "Aurora", "Icon", "Momentum");
 
+        Random randomChance = new Random();
+        int firstName;
+        int secondName;
+        String name;
+
+        firstName = randomChance.nextInt(carNamesList.size());
+        secondName = randomChance.nextInt(carNamesList.size());
+        name = new StringBuilder(carNamesList.get(firstName)).append(" ").append(carNamesList.get(secondName)).toString();
+
+        return name;
+    }
 
 
 
