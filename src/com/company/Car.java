@@ -7,8 +7,8 @@ import java.util.Random;
 public class Car {
     String name;
     int normalspeed;
-    int distancetravel;
-    int speed;
+    int distanceTraveled;
+
 
     public Car (){
         name = carName();
@@ -17,13 +17,7 @@ public class Car {
 
 
     public void setSpeedLimit(int limit){
-        Random randomChance = new Random();
-        int x = randomChance.nextInt(100);
-        if (x<=30){
-            normalspeed = limit;
-        }
-
-
+        normalspeed = limit;
     }
     private Integer normalSpeed(){
         Random randomChance = new Random();
@@ -35,7 +29,7 @@ public class Car {
 
 
     public void moveForAnHour(){
-        distancetravel = distancetravel + normalspeed;
+        distanceTraveled = distanceTraveled + normalspeed;
     }
     private String carName(){
         List<String> carNamesList = Arrays.asList(  "Centaur", "Majesty","Utopia",
