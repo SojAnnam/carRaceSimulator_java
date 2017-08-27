@@ -7,6 +7,7 @@ import java.util.Random;
 public class Cars {
     String name;
     int normalspeed;
+    static int limitSpeed = 0;
     int distanceTraveled;
     private int lowSpeed = 80;
     private int highSpeed = 110;
@@ -17,12 +18,13 @@ public class Cars {
         normalspeed = normalSpeed();
     }
 
-
+    //30% chance that they can go only with 70km/h speed.
     public static void setSpeedLimit(int limit){
 
-        normalspeed = limit;
+        limitSpeed = limit;
     }
 
+    //the normal speed of the car. Set to a random number in the constructor between 80-110km/h.
     private Integer normalSpeed(){
 
         Random randomChance = new Random();
@@ -34,11 +36,15 @@ public class Cars {
 
     public void moveForAnHour(){
 
+        if(limitSpeed != 0){
+            normalspeed = limitSpeed;
+        }
+
         distanceTraveled = distanceTraveled + normalspeed;
     }
 
 
-
+    //set cars name
     private String carName(){
         List<String> carNamesList = Arrays.asList(  "Centaur", "Majesty","Utopia",
                 "Scorpion","Scorpion", "Nimbus",

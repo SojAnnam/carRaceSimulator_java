@@ -10,13 +10,14 @@ public class Motorcycles {
     private int lowSpeed = 5;
     private int highSpeed = 50;
 
+
     public Motorcycles( int nameNumber){
 
         name = new StringBuilder("Motorcycle").append(" ").append(nameNumber+1).toString();
 
     }
 
-
+    //If rains, travels with 5-50km/h slower (randomly)
     public void setSpeed(boolean isRaining){
         if (isRaining){
             Random randomChance = new Random();
