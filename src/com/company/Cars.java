@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Car {
+public class Cars {
     String name;
     int normalspeed;
     int distanceTraveled;
@@ -12,13 +12,14 @@ public class Car {
     private int highSpeed = 110;
 
 
-    public Car (){
+    public Cars (){
         name = carName();
         normalspeed = normalSpeed();
     }
 
 
-    public void setSpeedLimit(int limit){
+    public static void setSpeedLimit(int limit){
+
         normalspeed = limit;
     }
 
@@ -32,6 +33,7 @@ public class Car {
 
 
     public void moveForAnHour(){
+
         distanceTraveled = distanceTraveled + normalspeed;
     }
 

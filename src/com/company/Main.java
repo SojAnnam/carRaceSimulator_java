@@ -1,79 +1,144 @@
 package com.company;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.lang.System.*;
 
 
 public class Main {
 
     public static void main(String[] args) {
+        ArrayList<Map>raceResult=simulateRace();
+        printRaceResults(raceResult.get(0),raceResult.get(1),raceResult.get(2),raceResult.get(3));
+        
+    }
 
-
-        Car car_container[] = new Car[10];
-        for (int i = 0; i < 10; i++) {
-            car_container[i] = new Car();
-
-
-        }
-        for (int j = 1; j <= 50; j++) {
+        public static void createVehicles(){
+            //Car race
+            //init 10 car for the race
+            Cars car[] = new Cars[10];
             for (int i = 0; i < 10; i++) {
-                if (isRaining()) {
-                    car_container[i].setSpeedLimit(70);
-                    car_container[i].moveForAnHour();
-                } else {
-                    car_container[i].moveForAnHour();
+                car[i] = new Cars();
+            }
+            // motorcycle race
+            //init 10 motorcycles
+            Motorcycles motor[] = new Motorcycles[10];
+            for (int numberOfMotor = 0; numberOfMotor < 10; numberOfMotor++) {
+                motor[numberOfMotor] = new Motorcycles(numberOfMotor);
+            }
+            //Race of Truck
+            //Init 10 truck
+            Trucks truck[] = new Trucks[10];
+            for (int numberOfTruck = 0; numberOfTruck < 10; numberOfTruck++) {
+                truck[numberOfTruck] = new Trucks();
+            }
+        }
+
+        public  static ArrayList<Map> simulateRace() {
+
+            //Car race
+            //init 10 car for the race
+            Cars car[] = new Cars[10];
+            for (int i = 0; i < 10; i++) {
+                car[i] = new Cars();
+            }
+
+            //move  each car for 50 hours
+            for (int j = 1; j <= 50; j++) {
+                for (int i = 0; i < 10; i++) {
+                    if (isRaining()) {
+                        car[i].setSpeedLimit(70);
+                        car[i].moveForAnHour();
+                    } else {
+                        car[i].moveForAnHour();
+                    }
                 }
             }
 
-        }
-        for (int i = 0; i < 10; i++) {
-            System.out.println("Name of the Car: " + car_container[i].name);
-            System.out.println(" Distance traveled :"+ car_container[i].distanceTraveled);
-        }
+            //safe result in dictionary
+            HashMap<String, Integer> carsStat = new HashMap<>();
+            for (int i = 0; i < 10; i++) {
+                carsStat.put(car[i].name, car[i].distanceTraveled);
+            }
 
-        Motorcycle motor[] = new Motorcycle[10];
-        for (int numberOfMotor = 0; numberOfMotor < 10; numberOfMotor++) {
-            motor[numberOfMotor] = new Motorcycle(numberOfMotor);
-
-        }
-        for (int s = 1; s <= 50; s++) {
-            boolean isRainingChance = isRaining();
+            // motorcycle race
+            //init 10 motorcycles
+            Motorcycles motor[] = new Motorcycles[10];
             for (int numberOfMotor = 0; numberOfMotor < 10; numberOfMotor++) {
-                motor[numberOfMotor].setSpeed(isRainingChance);
-                motor[numberOfMotor].moveForAnHour();
+                motor[numberOfMotor] = new Motorcycles(numberOfMotor);
             }
-        }
-        for (int numberOfMotor = 0; numberOfMotor < 10; numberOfMotor++) {
-
-            System.out.println( " Name of the Motorcycle: " + motor[numberOfMotor].name);
-            System.out.println("Distance traveled: " + motor[numberOfMotor].distanceTraveled);
-        }
 
 
-        Truck truck[] = new Truck[10];
-        for (int numberOfTruck = 0;numberOfTruck< 10; numberOfTruck++){
-            truck[numberOfTruck] = new Truck();
+            //each racer moves 50 hours
+            for (int s = 1; s <= 50; s++) {
+                boolean isRainingChance = isRaining();
+                for (int numberOfMotor = 0; numberOfMotor < 10; numberOfMotor++) {
+                    motor[numberOfMotor].setSpeed(isRainingChance);
+                    motor[numberOfMotor].moveForAnHour();
+                }
+            }
 
-        }
-        for (int s = 1; s <= 50; s++) {
+            //safe result in dictionary
+            HashMap<String, Integer> motorsStat = new HashMap<>();
+            IntStream.range(0, 10).forEach(numberOfMotor -> {
+                motorsStat.put(motor[numberOfMotor].name, motor[numberOfMotor].distanceTraveled);
+            });
+
+
+
+            //Race of Truck
+            //Init 10 truck
+            Trucks truck[] = new Trucks[10];
             for (int numberOfTruck = 0; numberOfTruck < 10; numberOfTruck++) {
-                truck[numberOfTruck].moveForAnHour();
+                truck[numberOfTruck] = new Trucks();
             }
-        }
-        HashMap<String, Integer> truckStat = new HashMap<>();
-        for (int numberOfTruck = 0; numberOfTruck < 10; numberOfTruck++) {
-            truckStat.put(truck[numberOfTruck].name,truck[numberOfTruck].distanceTraveled);
-            System.out.println("Name of the Truck: "+ truck[numberOfTruck].name);
-            System.out.println("Brake down time: " + truck[numberOfTruck].breakdownTurnsLeft);
-            System.out.println("Distance traveled : " + truck[numberOfTruck].distanceTraveled);
 
-        }
+            // 50 hours race
+            for (int s = 1; s <= 50; s++) {
+                for (int numberOfTruck = 0; numberOfTruck < 10; numberOfTruck++) {
+                    truck[numberOfTruck].moveForAnHour();
+                }
+            }
+
+            //Safe result in dictionary(Truckname : distancetraveled, Truckname : brakedowntime)
+            Map<String, Integer> truckStat = new HashMap<>();
+            Map<String, Integer> brakeDownStat = new HashMap<>();
+            for (int numberOfTruck = 0; numberOfTruck < 10; numberOfTruck++) {
+
+                truckStat.put(truck[numberOfTruck].name, truck[numberOfTruck].distanceTraveled);
+                brakeDownStat.put(truck[numberOfTruck].name,truck[numberOfTruck].breakdownTurnsLeft);
+            }
+
+            //return race simulator result in list
+            ArrayList<Map> raceResult = new ArrayList<>();
+            raceResult.add(carsStat);
+            raceResult.add(motorsStat);
+            raceResult.add(truckStat);
+            raceResult.add(brakeDownStat);
+            return raceResult;
     }
 
 
+    //print result
+    public static void printRaceResults(Map carsStat, Map motorsStat, Map truckStat, Map brakeDownStat){
+
+        carsStat.forEach((key, value) -> out.println("Name of the Car: " + key + " Distance traveled : " + value));
+        motorsStat.forEach((key,value) -> out.println("Name of the Motorcycle: " + key +" Distance traveled : " + value));
+        truckStat.forEach((key,value) -> out.println("Name of the Truck:" + key + " Distance traveled: " + value + " Brake down time: " + brakeDownStat.get(key)));
+
+    }
+    //30% chance of rain every hour
     public static boolean isRaining(){
         Random randomChance = new Random();
         int x = randomChance.nextInt(100);
-        return x <= 30;
+        if(x <= 30) {
+            return true;
+        }else {
+            return false;
+        }
+
     }
 
 
