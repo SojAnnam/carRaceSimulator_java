@@ -8,6 +8,8 @@ public class Car {
     String name;
     int normalspeed;
     int distanceTraveled;
+    private int lowSpeed = 80;
+    private int highSpeed = 110;
 
 
     public Car (){
@@ -19,11 +21,12 @@ public class Car {
     public void setSpeedLimit(int limit){
         normalspeed = limit;
     }
+
     private Integer normalSpeed(){
+
         Random randomChance = new Random();
-        int x = randomChance.nextInt(30);
-        int setNormalSpeed = 110-x;
-        return setNormalSpeed;
+        int randomNormalSpeed = randomChance.nextInt(highSpeed-lowSpeed) + lowSpeed;
+        return randomNormalSpeed;
     }
 
 
@@ -31,6 +34,9 @@ public class Car {
     public void moveForAnHour(){
         distanceTraveled = distanceTraveled + normalspeed;
     }
+
+
+
     private String carName(){
         List<String> carNamesList = Arrays.asList(  "Centaur", "Majesty","Utopia",
                 "Scorpion","Scorpion", "Nimbus",
