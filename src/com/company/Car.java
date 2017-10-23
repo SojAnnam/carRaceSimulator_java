@@ -64,7 +64,7 @@ public class Car extends Vehicles{
             speed = limitSpeed;
         }
 
-        distanceTraveled = distanceTraveled + speed;
+        distanceWithSpeed();
     }
 
 

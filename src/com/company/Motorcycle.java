@@ -27,7 +27,7 @@ public class Motorcycle extends Vehicles {
     @Override
     public void moveForAnHour(){
 
-        distanceTraveled += speed;
+        distanceWithSpeed();
     }
 
     @Override

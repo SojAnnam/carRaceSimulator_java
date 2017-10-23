@@ -6,6 +6,7 @@ public abstract class Vehicles {
     int speed = 0;
     int distanceTraveled = 0;
 
+    public  void distanceWithSpeed(){distanceTraveled = distanceTraveled + speed;}
     public abstract void moveForAnHour();
     public abstract String toString();
 

@@ -24,7 +24,7 @@ public class Truck extends Vehicles {
             if (brakeDownChance<=5) {
                 breakdownTurnsLeft += 1;
             }else {
-                distanceTraveled += speed;
+                distanceWithSpeed();
             }
         }else {
             breakdownTurnsLeft += 1;
