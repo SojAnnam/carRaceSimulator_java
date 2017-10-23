@@ -2,18 +2,15 @@ package com.company;
 
 import java.util.Random;
 
-public class Motorcycles {
+public class Motorcycle extends Vehicles {
 
-    int speed =100;
-    String name;
-    int distanceTraveled;
     private int lowSpeed = 5;
     private int highSpeed = 50;
 
 
-    public Motorcycles( int nameNumber){
-
+    public Motorcycle(int nameNumber){
         name = new StringBuilder("Motorcycle").append(" ").append(nameNumber+1).toString();
+        speed =100;
 
     }
 
@@ -27,13 +24,19 @@ public class Motorcycles {
             speed = 100;
         }
     }
-
+    @Override
     public void moveForAnHour(){
 
         distanceTraveled += speed;
     }
 
-
+    @Override
+    public String toString() {
+        return "Motorcycle{" +
+                "name='" + name + '\'' +
+                ", distanceTraveled=" + distanceTraveled +
+                '}';
+    }
 }
 
 

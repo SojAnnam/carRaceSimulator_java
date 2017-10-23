@@ -4,18 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Cars {
-    String name;
-    int normalspeed;
+public class Car extends Vehicles{
+
+
     static int limitSpeed = 0;
-    int distanceTraveled;
     private int lowSpeed = 80;
     private int highSpeed = 110;
 
 
-    public Cars (){
-        name = carName();
-        normalspeed = normalSpeed();
+    public Car(){
+        this.name = carName();
+        this.speed = normalSpeed();
     }
 
     //30% chance that they can go only with 70km/h speed.
@@ -34,14 +33,6 @@ public class Cars {
 
 
 
-    public void moveForAnHour(){
-
-        if(limitSpeed != 0){
-            normalspeed = limitSpeed;
-        }
-
-        distanceTraveled = distanceTraveled + normalspeed;
-    }
 
 
     //set cars name
@@ -66,7 +57,22 @@ public class Cars {
         return name;
     }
 
+    @Override
+    public void moveForAnHour(){
+
+        if(limitSpeed != 0){
+            speed = limitSpeed;
+        }
+
+        distanceTraveled = distanceTraveled + speed;
+    }
 
 
-
+    @Override
+    public String toString() {
+        return "Car{" +
+                "name='" + name + '\'' +
+                ", distanceTraveled=" + distanceTraveled +
+                '}';
+    }
 }
